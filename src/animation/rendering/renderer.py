@@ -1,8 +1,8 @@
 from pathlib import Path
 from typing import List
 
-from .canvas import Canvas
-from .camera import Camera
+from ..core.canvas import Canvas
+from ..core.camera import Camera
 
 import numpy as np
 from moviepy import (

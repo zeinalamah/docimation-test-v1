@@ -11,7 +11,7 @@ Documents mix Markdown and LaTeX using `||md` and `||ltx` markers. Pages can als
 - Embedding of charts and shapes as images
 - Basic zoom animation controlled by a camera
 - Preset page sizes like A4 and A3 for consistent layouts
-- Utilities for highlighting and typing animations
+- Utilities for highlighting, typing, and fade transitions
 
 ## Usage
 
@@ -24,7 +24,10 @@ python3 src/main.py
 
 The requirements include `matplotlib`, `moviepy`, `pillow`, and `numpy`.
 
-The resulting video is saved to the `output/` folder.  A simple example is embedded in `src/main.py` and a modular multi-page demo can be run with:
+The resulting video is saved to the `output/` folder.  Core classes now live under
+`animation/core`, effects in `animation/effects`, and rendering utilities in
+`animation/rendering`. A simple example is embedded in `src/main.py` and a modular
+multi-page demo can be run with:
 
 ```bash
 PYTHONPATH=src python examples/three_page/main.py

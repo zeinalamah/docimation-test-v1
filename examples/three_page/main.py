@@ -5,6 +5,7 @@ from animation import (
     Renderer,
     highlight_text_frames,
     typing_frames,
+    fade_in_frames,
 )
 from .pages import page1, page2, page3
 
@@ -25,6 +26,7 @@ def main() -> None:
     canvas.add_page(p3, position=(p1.width * 2, 0))
 
     composite = canvas.render_composite()
+    fade_seq = fade_in_frames(composite, steps=8)
 
     # Highlight the first heading character by character
     bbox = (
@@ -44,7 +46,7 @@ def main() -> None:
         "Typing demo",
         color="blue",
     )
-    images = [composite, p1.render_image(), *highlight_seq, *typing_seq]
+    images = [*fade_seq, p1.render_image(), *highlight_seq, *typing_seq]
 
     renderer = Renderer(fps=24, output_dir="output")
     renderer.render_images(images, zoom=1.2, duration=5)
