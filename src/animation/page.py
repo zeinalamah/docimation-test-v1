@@ -34,7 +34,7 @@ class Page:
         ax.set_facecolor(self.theme.background_color)
         ax.axis('off')
 
-        y = 0.9
+        y = 0.95
         for seg_type, text in self.segments:
             if seg_type == 'ltx':
                 ax.text(0.05, y, f"${text}$", va='top', **self.theme.as_mpl_kwargs())
@@ -66,8 +66,8 @@ class Page:
                                 ax.text(x, y, part, va='top', **kw)
                             x += len(part) * 0.01
                         
-                    y -= 0.05
-                y -= 0.05
+                    y -= 0.08
+                y -= 0.08
         buf = BytesIO()
         fig.savefig(buf, format='png', dpi=100, bbox_inches='tight')
         plt.close(fig)

@@ -1,0 +1,33 @@
+from animation import Document, Canvas, Camera, Renderer, highlight_frames
+from .pages import page1, page2, page3
+
+
+def main() -> None:
+    p1 = page1.make_page()
+    p2 = page2.make_page()
+    p3 = page3.make_page()
+
+    doc = Document()
+    doc.add_page(p1)
+    doc.add_page(p2)
+    doc.add_page(p3)
+
+    canvas = Canvas(width=p1.width * 3, height=p1.height)
+    canvas.add_page(p1, position=(0, 0))
+    canvas.add_page(p2, position=(p1.width, 0))
+    canvas.add_page(p3, position=(p1.width * 2, 0))
+
+    composite = canvas.render_composite()
+
+    # Highlight the first heading on page1 for demonstration
+    bbox = (int(p1.width * 0.05), int(p1.height * 0.05), int(p1.width * 0.5), int(p1.height * 0.15))
+    highlight_seq = highlight_frames(p1.render_image(), bbox, steps=10, color="yellow")
+
+    images = [composite, p1.render_image(), *highlight_seq]
+
+    renderer = Renderer(fps=24, output_dir="output")
+    renderer.render_images(images, zoom=1.2, duration=5)
+
+
+if __name__ == "__main__":
+    main()

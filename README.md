@@ -22,4 +22,8 @@ python3 src/main.py
 
 The requirements include `matplotlib`, `moviepy`, `pillow`, and `numpy`.
 
-The resulting video is saved to the `output/` folder.  An example document is embedded in `src/main.py`.
+The resulting video is saved to the `output/` folder.  A simple example is embedded in `src/main.py` and a modular multi-page demo can be run with:
+
+```bash
+PYTHONPATH=src python examples/three_page/main.py
+```
