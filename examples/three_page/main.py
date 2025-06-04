@@ -1,4 +1,11 @@
-from animation import Document, Canvas, Camera, Renderer, highlight_frames
+from animation import (
+    Document,
+    Canvas,
+    Camera,
+    Renderer,
+    highlight_text_frames,
+    typing_frames,
+)
 from .pages import page1, page2, page3
 
 
@@ -19,11 +26,25 @@ def main() -> None:
 
     composite = canvas.render_composite()
 
-    # Highlight the first heading on page1 for demonstration
-    bbox = (int(p1.width * 0.05), int(p1.height * 0.05), int(p1.width * 0.5), int(p1.height * 0.15))
-    highlight_seq = highlight_frames(p1.render_image(), bbox, steps=10, color="yellow")
+    # Highlight the first heading character by character
+    bbox = (
+        int(p1.width * 0.05),
+        int(p1.height * 0.05),
+        int(p1.width * 0.5),
+        int(p1.height * 0.15),
+    )
+    highlight_seq = highlight_text_frames(
+        p1.render_image(), bbox, text="Sales Overview", color="yellow"
+    )
 
-    images = [composite, p1.render_image(), *highlight_seq]
+    # Demonstrate typing effect on page3
+    typing_seq = typing_frames(
+        p3.render_image(),
+        (int(p3.width * 0.05), int(p3.height * 0.6)),
+        "Typing demo",
+        color="blue",
+    )
+    images = [composite, p1.render_image(), *highlight_seq, *typing_seq]
 
     renderer = Renderer(fps=24, output_dir="output")
     renderer.render_images(images, zoom=1.2, duration=5)

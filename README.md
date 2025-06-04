@@ -10,6 +10,8 @@ Documents mix Markdown and LaTeX using `||md` and `||ltx` markers. Pages can als
 - Simple text highlighting using `==text==`
 - Embedding of charts and shapes as images
 - Basic zoom animation controlled by a camera
+- Preset page sizes like A4 and A3 for consistent layouts
+- Utilities for highlighting and typing animations
 
 ## Usage
 

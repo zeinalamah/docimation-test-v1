@@ -36,3 +36,15 @@ def highlight_frames(
         progress = i / float(steps)
         frames.append(highlight_region(image, bbox, progress, color, alpha))
     return frames
+
+
+def highlight_text_frames(
+    image: Image.Image,
+    bbox: Tuple[int, int, int, int],
+    text: str,
+    color: str = "yellow",
+    alpha: float = 0.4,
+) -> List[Image.Image]:
+    """Highlight *text* character by character within *bbox*."""
+    steps = max(1, len(text))
+    return highlight_frames(image, bbox, steps=steps, color=color, alpha=alpha)

@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 from io import BytesIO
 import re
 
@@ -15,9 +15,15 @@ Segment = Tuple[str, str]
 class Page:
     width: int = 1280
     height: int = 720
+    page_size: Optional[str] = None
     theme: Theme = field(default_factory=Theme)
     segments: List[Segment] = field(default_factory=list)
     images: List[Tuple[Image.Image, Tuple[float, float], float]] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        if self.page_size:
+            from theming import page_size as _page_size
+            self.width, self.height = _page_size(self.page_size)
 
     def add_segment(self, segment: Segment) -> None:
         self.segments.append(segment)
