@@ -18,9 +18,17 @@ class Canvas:
         self.objects.append((page, position))
 
     def render_images(self) -> List[Image.Image]:
-        """Render all pages to images. Position is ignored for now."""
+        """Render each page individually and return list of images."""
         images = []
         for page, _ in self.objects:
             img = page.render_image()
             images.append(img)
         return images
+
+    def render_composite(self) -> Image.Image:
+        """Render all pages onto a single canvas respecting their positions."""
+        base = Image.new("RGBA", (self.width, self.height), self.background)
+        for page, pos in self.objects:
+            img = page.render_image()
+            base.paste(img, pos, img)
+        return base

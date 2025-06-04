@@ -1,9 +1,5 @@
 from parsing.document_parser import parse_document
-from animation.document import Document
-from animation.page import Page
-from animation.canvas import Canvas
-from animation.camera import Camera
-from animation.renderer import Renderer
+from animation import Document, Page, Canvas, Camera, Renderer
 from visuals import bar_chart, circle
 
 
