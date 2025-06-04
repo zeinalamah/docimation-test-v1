@@ -1,4 +1,6 @@
-matplotlib
-moviepy
-pillow
-numpy
+matplotlib>=3.4
+moviepy>=1.0
+pillow>=9.0
+numpy>=1.20
+imageio>=2.9
+imageio-ffmpeg>=0.4
