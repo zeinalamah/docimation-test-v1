@@ -10,7 +10,21 @@ def typing_frames(
     color: str = "black",
     font: ImageFont.ImageFont | None = None,
 ) -> List[Image.Image]:
-    """Generate frames showing *text* typed onto *image* one character at a time."""
+    """Generate frames showing ``text`` typed onto ``image`` one character at a time.
+
+    Parameters
+    ----------
+    image:
+        Base image that the text will be drawn on.
+    position:
+        ``(x, y)`` coordinates for the text origin.
+    text:
+        Text string to type.
+    color:
+        Text color.
+    font:
+        Optional PIL font instance. If ``None`` the default bitmap font is used.
+    """
     font = font or ImageFont.load_default()
     frames = []
     typed = ""

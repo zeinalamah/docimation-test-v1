@@ -6,6 +6,9 @@ import re
 import matplotlib.pyplot as plt
 from PIL import Image
 
+if not hasattr(Image, "ANTIALIAS"):
+    Image.ANTIALIAS = Image.Resampling.LANCZOS
+
 from theming.theme import Theme
 
 Segment = Tuple[str, str]
