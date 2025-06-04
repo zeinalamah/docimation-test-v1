@@ -1,10 +1,13 @@
 from dataclasses import dataclass, field
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 from io import BytesIO
 import re
 
 import matplotlib.pyplot as plt
 from PIL import Image
+
+if not hasattr(Image, "ANTIALIAS"):
+    Image.ANTIALIAS = Image.Resampling.LANCZOS
 
 from theming.theme import Theme
 
@@ -15,9 +18,15 @@ Segment = Tuple[str, str]
 class Page:
     width: int = 1280
     height: int = 720
+    page_size: Optional[str] = None
     theme: Theme = field(default_factory=Theme)
     segments: List[Segment] = field(default_factory=list)
     images: List[Tuple[Image.Image, Tuple[float, float], float]] = field(default_factory=list)
+
+    def __post_init__(self) -> None:
+        if self.page_size:
+            from theming import page_size as _page_size
+            self.width, self.height = _page_size(self.page_size)
 
     def add_segment(self, segment: Segment) -> None:
         self.segments.append(segment)
@@ -34,7 +43,7 @@ class Page:
         ax.set_facecolor(self.theme.background_color)
         ax.axis('off')
 
-        y = 0.9
+        y = 0.95
         for seg_type, text in self.segments:
             if seg_type == 'ltx':
                 ax.text(0.05, y, f"${text}$", va='top', **self.theme.as_mpl_kwargs())
@@ -66,8 +75,8 @@ class Page:
                                 ax.text(x, y, part, va='top', **kw)
                             x += len(part) * 0.01
                         
-                    y -= 0.05
-                y -= 0.05
+                    y -= 0.08
+                y -= 0.08
         buf = BytesIO()
         fig.savefig(buf, format='png', dpi=100, bbox_inches='tight')
         plt.close(fig)

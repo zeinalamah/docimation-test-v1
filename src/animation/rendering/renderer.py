@@ -1,11 +1,16 @@
 from pathlib import Path
 from typing import List
 
-from .canvas import Canvas
-from .camera import Camera
+from ..core.canvas import Canvas
+from ..core.camera import Camera
 
 import numpy as np
-from moviepy.editor import ImageClip, AudioFileClip, concatenate_videoclips, vfx
+from moviepy.editor import (
+    ImageClip,
+    AudioFileClip,
+    concatenate_videoclips,
+    vfx,
+)
 from PIL import Image
 
 if not hasattr(Image, "ANTIALIAS"):
@@ -30,7 +35,10 @@ class Renderer:
         clips = []
         for img in images:
             clip = ImageClip(np.array(img)).set_duration(duration)
-            clip = clip.fx(vfx.resize, lambda t: 1 + (zoom - 1) * t / duration)
+            clip = clip.fx(
+                vfx.resize,
+                lambda t: 1 + (zoom - 1) * t / duration,
+            )
             clips.append(clip)
         video = concatenate_videoclips(clips, method="compose")
 
