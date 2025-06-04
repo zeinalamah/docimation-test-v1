@@ -22,7 +22,8 @@ pip install -r requirements.txt
 python3 src/main.py
 ```
 
-The requirements include `matplotlib`, `moviepy`, `pillow`, and `numpy`.
+The requirements include `matplotlib`, `moviepy`, `pillow`, `numpy`, `imageio`,
+and `imageio-ffmpeg`.
 
 The resulting video is saved to the `output/` folder.  Core classes now live under
 `animation/core`, effects in `animation/effects`, and rendering utilities in
